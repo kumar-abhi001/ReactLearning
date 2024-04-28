@@ -1,48 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import About from "./componets/Abouts";
+import Home from "./componets/Home";
 
 function App() {
-  const [timer, setTimer] = useState(0);
-  const [isRunning, setIsRunning] = useState(false);
-
-  useEffect(() => {
-    let interval;
-    if (isRunning) {
-      interval = setInterval(() => {
-        setTimer(prevTimer => prevTimer + 1);
-      }, 1000); // Update the timer every second
-    } else {
-      clearInterval(interval);
-    }
-    // Cleanup function to clear the interval when component unmounts or when `isRunning` changes to false
-    return () => clearInterval(interval);
-  }, [isRunning]);
-
-  const handleStart = () => {
-    setIsRunning(true);
-  };
-
-  const handleStop = () => {
-    setIsRunning(false);
-  };
-
-  const handleReset = () => {
-    setTimer(0);
-  };
-
   return (
-    <div>
-      <h1>Timer: {timer}s</h1>
-      <button onClick={handleStart} disabled={isRunning}>
-        Start
-      </button>
-      <button onClick={handleStop} disabled={!isRunning}>
-        Stop
-      </button>
-      <button onClick={handleReset}>
-        Reset
-      </button>
-    </div>
-  );
+    <Router>
+      <div>
+        <ul>
+          <li>
+            <Link to='/'>Home</Link>
+          </li>
+          <li>
+            <Link to='/about'>About</Link>
+          </li>
+        </ul>
+      </div>
+
+      <Routes>
+        <Route path="/" element={<Home></Home>}></Route>
+        <Route path="/about" element={<About></About>}></Route>
+      </Routes>
+    </Router>
+  )
 }
 
 export default App;
