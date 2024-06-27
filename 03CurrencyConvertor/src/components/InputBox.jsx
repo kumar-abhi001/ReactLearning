@@ -30,7 +30,8 @@ function InputBox({
                     className="font-medium mt-2 bg-gray-200 px-1 py-1 rounded-lg outline-none"
                     onChange={(e) => onCurrencyChange}
                 >
-                    {currencyOptions.map((currency) => (
+                    { 
+                        currencyOptions.map((currency) => (
                         <option id={currency} key={currency} value={currency}>{currency}</option>
                     ))}
 

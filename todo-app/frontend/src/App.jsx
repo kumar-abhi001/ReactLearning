@@ -1,28 +1,23 @@
 import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import { Navbar } from './components/Navbar'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css'
+import { Login } from './components/Login';
+import { Signin } from './components/Signin';
 
 function App() {
-  const [todos, setTodos] = useState([]);
-
-  useEffect(() => {
-    fetch('http://localhost:3000/todos', {
-      method: "GET"
-    })
-    .then((res) => res.json()).then((data) => {
-      setTodos(data);
-    })
-  }, [])
-
   return (
     <>
-      {todos.map((todo) => {
-        return <div>
-          <div id={todo.id}>Title:{" " + todo.title} <br /> Description:{" " +todo.description}</div>
-          <br />
-        </div>
-      })}
+      
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path='/login' element={<Login />} />
+          <Route path='/signin' element={<Signin />} />
+        </Routes>
+      </Router>
     </>
   )
 }
